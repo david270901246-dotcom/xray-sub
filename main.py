@@ -6,7 +6,7 @@ Xray 手机订阅服务器
  - 生成 v2rayNG / Clash Meta 兼容的订阅内容
  - 自动测速，按速度排序
 
-Railway 部署说明：
+Railway 部署：
  Railway 会自动注入 PORT 环境变量（随机端口）
  脚本必须读取 PORT 并绑定 0.0.0.0 才能被公网访问
  无需 requirements.txt（只用 Python 标准库）
@@ -31,8 +31,8 @@ import random
 # ============================================================
 # 配置（Railway 关键：PORT 读环境变量，BIND 必须是 0.0.0.0）
 # ============================================================
-PORT = int(os.environ.get("PORT", 8080)) # Railway 会覆盖
-BIND = os.environ.get("BIND", "0.0.0.0") # 必须 0.0.0.0 才对外可见
+PORT = int(os.environ.get("PORT", 8080))
+BIND = os.environ.get("BIND", "0.0.0.0")
 
 # 节点源
 NODE_SOURCES = [
@@ -233,6 +233,10 @@ def parse_clash(content):
  nodes.append(node)
  current = {}
  line = line[2:]
- if line.startswith("{") and line.endswith("
+ if line.startswith("{") and line.endswith("}"):
+ inline = line[1:-1]
+ current = parse_clash_inline(inline)
+ node = clash_to_node(current)
+ if node:
+ 
 ...(truncated)...
-fix: read PORT from env, use RAILWAY_PUBLIC_DOMAIN
