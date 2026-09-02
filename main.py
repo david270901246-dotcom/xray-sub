@@ -42,8 +42,10 @@ import random
 # 配置
 # ============================================================
 
-PORT = int(os.environ.get("PORT", 8899))
+import os
+PORT = int(os.environ.get("PORT", 8080))
 BIND = "0.0.0.0"
+
 
 
 # 节点源
