@@ -235,3 +235,4 @@ def parse_clash(content):
  line = line[2:]
  if line.startswith("{") and line.endswith("
 ...(truncated)...
+fix: read PORT from env, use RAILWAY_PUBLIC_DOMAIN
